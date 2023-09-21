@@ -1,0 +1,29 @@
+{
+  "name": "@ilsrbn/axios-refresh-interceptor",
+  "version": "1.0.0",
+  "description": ":q",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "dependencies": {
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilsrbn/axios-refresh-interceptor.git"
+  },
+  "author": "Illia Serbin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilsrbn/axios-refresh-interceptor/issues"
+  },
+  "homepage": "https://github.com/ilsrbn/axios-refresh-interceptor#readme"
+}

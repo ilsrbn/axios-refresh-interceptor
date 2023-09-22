@@ -58,3 +58,4 @@ export default axiosIns
 6. Retry latest request with new token
 7. If latest request fails again - logout. (`logout(error)`)
 
+## If you want to support me, you can [buy me a coffee](https://www.buymeacoffee.com/ilsrbn). Thanks!

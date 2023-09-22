@@ -25,5 +25,15 @@
   "bugs": {
     "url": "https://github.com/ilsrbn/axios-refresh-interceptor/issues"
   },
-  "homepage": "https://github.com/ilsrbn/axios-refresh-interceptor#readme"
+  "homepage": "https://github.com/ilsrbn/axios-refresh-interceptor#readme",
+  "keywords": [
+    "axios",
+    "refresh",
+    "token",
+    "interceptor",
+    "http",
+    "auth",
+    "authorization",
+    "authentication"
+  ]
 }

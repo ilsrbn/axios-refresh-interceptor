@@ -1,14 +1,11 @@
 {
+  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ESNext",
-    "declaration": true,
-    "outDir": "./dist"
+    "rootDir": ".",
+    "outDir": "build"
   },
   "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
+    "src/**/*.ts",
+    "test/**/*.ts"
   ]
 }

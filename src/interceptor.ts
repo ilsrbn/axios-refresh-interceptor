@@ -13,9 +13,9 @@ import type {
   AxiosRequestConfig,
   AxiosResponse,
   RawAxiosRequestHeaders,
-} from "axios";
+} from 'axios';
 
-import type { IHooks, IResponseInterceptor } from "./types";
+import type {IHooks, IResponseInterceptor} from './types';
 
 export class ResponseInterceptor implements IResponseInterceptor {
   constructor(
@@ -30,7 +30,7 @@ export class ResponseInterceptor implements IResponseInterceptor {
      * @type {IHooks}
      */
     private hooks: IHooks
-  ) { }
+  ) {}
 
   public onFullfilled(response: AxiosResponse) {
     return response;
@@ -68,7 +68,7 @@ export class ResponseInterceptor implements IResponseInterceptor {
   private retryLatestRequest(
     config: AxiosRequestConfig
   ): Promise<AxiosResponse> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       resolve(this.axios(config));
     });
   }

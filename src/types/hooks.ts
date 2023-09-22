@@ -1,4 +1,4 @@
-import type { AxiosError } from "axios";
+import type {AxiosError} from 'axios';
 
 export interface IHooks {
   /* Getter to receive current refresh token
@@ -12,13 +12,13 @@ export interface IHooks {
    */
   fetchNewTokens(
     refreshToken: string
-  ): Promise<false | { token: string; refresh_token: string }>;
+  ): Promise<false | {token: string; refresh_token: string}>;
 
   /* Hook to update your localStorage, vuex, pinia, etc. with new tokens
    * @param {{token: string, refresh_token: string}} newTokens
    * @return {void}
    */
-  updateTokens(newTokens: { token: string; refresh_token: string }): void;
+  updateTokens(newTokens: {token: string; refresh_token: string}): void;
 
   /* Hook to perform logout logic, including redirect to login page
    * @param {AxiosError} error

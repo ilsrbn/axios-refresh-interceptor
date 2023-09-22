@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "node/no-extraneous-import": ["error", {
+        "allowModules": ["axios"]
+    }]
+  },
+  "extends": "./node_modules/gts/"
+}

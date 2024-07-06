@@ -1,49 +1,47 @@
 {
-  "name": "@ilsrbn/axios-refresh-interceptor",
-  "version": "1.0.4",
-  "description": "Personal solution for refresh token's flow",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "dependencies": {
-    "typescript": "^5.2.2"
-  },
-  "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "gts": "^5.0.1",
-    "typescript": "~5.1.6",
-    "@types/node": "20.4.6"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "compile": "tsc",
-    "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run lint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ilsrbn/axios-refresh-interceptor.git"
-  },
-  "author": "Illia Serbin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ilsrbn/axios-refresh-interceptor/issues"
-  },
-  "homepage": "https://github.com/ilsrbn/axios-refresh-interceptor#readme",
-  "keywords": [
-    "axios",
-    "refresh",
-    "token",
-    "interceptor",
-    "http",
-    "auth",
-    "authorization",
-    "authentication"
-  ]
+	"name": "@ilsrbn/axios-refresh-interceptor",
+	"version": "1.0.4",
+	"description": "Personal solution for refresh token's flow",
+	"main": "dist/src/index.js",
+	"types": "dist/src/index.d.ts",
+	"files": ["/dist/src"],
+	"dependencies": {
+		"typescript": "^5.2.2"
+	},
+	"devDependencies": {
+		"@types/axios": "^0.14.0",
+		"gts": "^5.0.1",
+		"typescript": "~5.1.6",
+		"@types/node": "20.4.6"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "gts lint",
+		"clean": "gts clean",
+		"compile": "tsc",
+		"fix": "gts fix",
+		"prepare": "npm run compile",
+		"pretest": "npm run compile",
+		"posttest": "npm run lint"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ilsrbn/axios-refresh-interceptor.git"
+	},
+	"author": "Illia Serbin",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ilsrbn/axios-refresh-interceptor/issues"
+	},
+	"homepage": "https://github.com/ilsrbn/axios-refresh-interceptor#readme",
+	"keywords": [
+		"axios",
+		"refresh",
+		"token",
+		"interceptor",
+		"http",
+		"auth",
+		"authorization",
+		"authentication"
+	]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@ilsrbn/axios-refresh-interceptor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Personal solution for refresh token's flow",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

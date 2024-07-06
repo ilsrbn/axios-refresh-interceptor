@@ -8,78 +8,83 @@
  * */
 
 import type {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  RawAxiosRequestHeaders,
-} from 'axios';
+	AxiosError,
+	AxiosHeaders,
+	AxiosInstance,
+	AxiosRequestConfig,
+	AxiosResponse,
+	RawAxiosRequestHeaders,
+} from "axios";
 
-import type {IHooks, IResponseInterceptor} from './types';
+import type { IHooks, IResponseInterceptor } from "./types";
 
 export class ResponseInterceptor implements IResponseInterceptor {
-  constructor(
-    /**
-     * An instance of Axios for making HTTP requests.
-     * @type {AxiosInstance}
-     */
-    private axios: AxiosInstance,
+	constructor(
+		/**
+		 * An instance of Axios for making HTTP requests.
+		 * @type {AxiosInstance}
+		 */
+		private axios: AxiosInstance,
 
-    /**
-     * An object containing hooks for various operations.
-     * @type {IHooks}
-     */
-    private hooks: IHooks
-  ) {}
+		/**
+		 * An object containing hooks for various operations.
+		 * @type {IHooks}
+		 */
+		private hooks: IHooks,
+	) {}
 
-  public onFullfilled(response: AxiosResponse) {
-    return response;
-  }
+	public onFullfilled(response: AxiosResponse) {
+		return response;
+	}
 
-  public async onRejected(error: AxiosError) {
-    // INFO: Handled logic for tokens refreshing
-    if (error.response && error.response.status === 401) {
-      const refreshToken = this.hooks.getRefreshToken();
+	public async onRejected(error: AxiosError) {
+		// INFO: Handled logic for tokens refreshing
+		if (await this.hooks.isAuthError(error)) {
+			const refreshToken = await this.hooks.getRefreshToken();
 
-      if (!refreshToken) this.hooks.logout(error);
-      else {
-        const newTokens = await this.hooks.fetchNewTokens(refreshToken);
-        if (!newTokens) this.hooks.logout(error);
-        else {
-          this.hooks.updateTokens(newTokens);
+			if (!refreshToken) await this.hooks.logout(error);
+			else {
+				const newTokens = await this.hooks.fetchNewTokens(refreshToken);
+				if (!newTokens) await this.hooks.logout(error);
+				else {
+					await this.hooks.updateTokens(newTokens);
 
-          // WARN: Workaround for axios issue
-          // Issue: https://github.com/axios/axios/issues/5089#issuecomment-1297761617
-          const config = this.convertAxiosHeaders(error.config || {});
+					// WARN: Workaround for axios issue
+					// Issue: https://github.com/axios/axios/issues/5089#issuecomment-1297761617
+					const config = this.convertAxiosHeaders(error.config || {});
+					config.headers = await this.hooks.setAuthHeaders(
+						config.headers as AxiosHeaders,
+						newTokens.token,
+					);
 
-          try {
-            return await this.retryLatestRequest(config);
-          } catch (latestError) {
-            console.warn("Latest request wasn't performed.", latestError);
-            this.hooks.logout(latestError as AxiosError);
-          }
-        }
-      }
-    }
+					try {
+						return await this.retryLatestRequest(config);
+					} catch (latestError) {
+						console.warn("Latest request wasn't performed.", latestError);
+						await this.hooks.logout(latestError as AxiosError);
+					}
+				}
+			}
+		}
 
-    return Promise.reject(error);
-  }
+		return Promise.reject(error);
+	}
 
-  private retryLatestRequest(
-    config: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
-    return new Promise(resolve => {
-      resolve(this.axios(config));
-    });
-  }
+	private retryLatestRequest(
+		config: AxiosRequestConfig,
+	): Promise<AxiosResponse> {
+		return new Promise((resolve) => {
+			resolve(this.axios(config));
+		});
+	}
 
-  // WARN: Workaround for axios issue
-  // Issue: https://github.com/axios/axios/issues/5089#issuecomment-1297761617
-  private convertAxiosHeaders(config: AxiosRequestConfig): AxiosRequestConfig {
-    config.headers = JSON.parse(
-      JSON.stringify(config.headers || {})
-    ) as RawAxiosRequestHeaders;
+	// WARN: Workaround for axios issue
+	// Issue: https://github.com/axios/axios/issues/5089#issuecomment-1297761617
+	private convertAxiosHeaders(config: AxiosRequestConfig): AxiosRequestConfig {
+		config.headers = JSON.parse(
+			JSON.stringify(config.headers || {}),
+		) as RawAxiosRequestHeaders;
 
-    return config;
-  }
+		return config;
+	}
 }

@@ -1,1 +1,2 @@
-export {ResponseInterceptor} from './interceptor';
+export { ResponseInterceptor } from "./interceptor";
+export { IHooks } from "./types/index";
